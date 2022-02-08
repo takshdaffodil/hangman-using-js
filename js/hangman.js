@@ -1,18 +1,18 @@
 const indianStates = [
-  "Andhra Pradesh",
-  "Arunachal Pradesh",
+  "Andhra_Pradesh",
+  "Arunachal_Pradesh",
   "Assam",
   "Bihar",
   "Chhattisgarh",
   "Goa",
   "Gujarat",
   "Haryana",
-  "Himachal Pradesh",
-  "Jammu and Kashmir",
+  "Himachal_Pradesh",
+  "Jammu_and_Kashmir",
   "Jharkhand",
   "Karnataka",
   "Kerala",
-  "Madhya Pradesh",
+  "Madhya_Pradesh",
   "Maharashtra",
   "Manipur",
   "Meghalaya",
@@ -22,16 +22,16 @@ const indianStates = [
   "Punjab",
   "Rajasthan",
   "Sikkim",
-  "Tamil Nadu",
+  "Tamil_Nadu",
   "Telangana",
   "Tripura",
   "Uttarakhand",
-  "Uttar Pradesh",
-  "West Bengal",
-  "Andaman and Nicobar Islands",
+  "Uttar_Pradesh",
+  "West_Bengal",
+  "Andaman_and_Nicobar_Islands",
   "Chandigarh",
-  "Dadra and Nagar Haveli",
-  "Daman and Diu",
+  "Dadra_and_Nagar Haveli",
+  "Daman_and_Diu",
   "Delhi",
   "Lakshadweep",
   "Puducherry",
@@ -66,6 +66,12 @@ const displayButtonKeyboard = () => {
   document.getElementById("alphabets").innerHTML = buttons;
 };
 
+document.onkeydown = function (evt) {
+  if (evt.key >= "a" && evt.key <= "z" && guessed.indexOf(evt.key) === -1) {
+    handleGuess(evt.key);
+  }
+};
+
 const handleGuess = (chosenLetter) => {
   guessed.indexOf(chosenLetter) === -1 ? guessed.push(chosenLetter) : null;
   document.getElementById(chosenLetter).setAttribute("disabled", true);
@@ -91,11 +97,11 @@ const guessedWord = () => {
 const updateImage = () => {
   document.getElementById("hangmanPic").src =
     "./assets/" + wrongGuessed + ".jpg";
-  console.log("./assets/" + wrongGuessed + ".jpg");
 };
 
 const checkGameWon = () => {
-  if (ansStatus === answer) {
+  const ansWithoutSpaces = ansStatus.replace(/ /g, "");
+  if (ansWithoutSpaces === answer) {
     document.getElementById("alphabets").innerHTML = "You won the game!";
   }
 };
@@ -127,3 +133,4 @@ document.getElementById("maxWrong").innerHTML = maxWrong;
 randomState();
 displayButtonKeyboard();
 guessedWord();
+alert(answer);
